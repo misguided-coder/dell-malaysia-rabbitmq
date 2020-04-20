@@ -59,7 +59,7 @@ RabbitMQ Broker Concepts
 5) Exchanges - is used for routing purposes
    Exchange Types 
    i)  Direct - supports binding key only
-   ii) Fanout - supports no binding key
+   ii) Fanout - supports no binding key (mindless broadcasting)
    iii)Topic -  supports binding pattern
    iv) Headers - supports message header used for routing 
      
