@@ -1,0 +1,114 @@
+Rules 
+
+Tea Break - 11 AM - 15 minutes- 20 minutes
+Lunch Break - 1 PM - 50 minutes - 60  minutes
+Tea Break - 3:30 PM - 15 minutes- 20 minutes
+Timings : 9 AM - 5 PM
+
+We will make it interactive
+Speck Out
+or send me messages in case of doubts
+
+Code Sharing
+Everyday will share code to you guys through GITHUB
+
+Ritesh Tyagi (Trainer)
+HI2TYAGI@YAHOO.COM
+
+RabbitMQ Prrequisites
+
+1) 2-3 years of some admin/dev exp
+2) Any other MQ product in the past is a plus
+3) Java/Javascript (little exosure) is needed
+
+Methodology used
+20% theory/concept
+80% practical
+
+First Steps
+
+System Ready
+Windows 10 machines 2-4 GB with Admin Rights
+
+RabbitMQ installation (Open Source)
+1) ERLang
+   a) download
+   b) install
+   c) configure
+	ERLANG_HOME = C:\Program Files\erl9.3
+        PATH = blah;blah;blah;%ERLANG_HOME%\bin
+   d) test/verify 
+2) RabbitMQ
+   a) download
+   b) install
+   c) configure
+        PATH = blah;blah;blah;%ERLANG_HOME%\bin;C:\Program Files\RabbitMQ Server\rabbitmq_server-3.7.7\sbin
+   d) test/verify (First stop RabbitMQ from Windows Service)
+	1) Start RabbitMQ from  command line - 5672(AMQP)
+	2) Open UI Management Console from browser - 15672(HTTP)
+
+RabbitMQ Management
+1) Command Line Interface (CLI) - rabbitmqctl.bat
+2) Graphical Interface  (GUI) - comes as a plugin ( rabbitmq_management,rabbitmq_management_agent )
+
+RabbitMQ Broker Concepts
+1) Messaging System/MQ Product/Message Broker
+2) Messaging Applications - PtP and PubSub 
+3) Queue/Topic
+4) Sender/Publisher and Receiver/Subscriber/Consumer 
+5) Exchanges - is used for routing purposes
+   Exchange Types 
+   i)  Direct - supports binding key only
+   ii) Fanout - supports no binding key
+   iii)Topic -  supports binding pattern
+   iv) Headers - supports message header used for routing 
+     
+6) Queues - is used as a message store
+7) Binding - is the link between exchange and queue
+   i) can be done from queue side to exchange side
+   ii) can be done from exchange side to queue side
+   
+8) Binding keys/patterns/headers - is used to setup link between exchange and queue
+9) Routing key - is sent kept inside message by the sender and used by the exchange to decide where to route the message to
+10) Connections - is the physical TCP connection between sender/receiver application and broker
+11) Channels - is the virtual connection over which messaging takes place
+12) Virtual Hosts - is used to seperate a single RabbitMQ instance to host multiple applications in different spaces
+13) Users - can be added with different priviledges
+14) Policies/Permmissions - can be used to define ACL
+15) Plugins  - are used to extend product functionalities 
+
+
+Routing/Integration Products
+Apache Camel
+ServiceMix
+JBOSS Fuse
+MuleSoft
+etc....
+
+Messaging Products
+ActiveMQ
+RabbitMQ
+Kafka
+IBMMQ 
+etc...
+
+Excecise 1
+a) Create an exchange named as News
+b) Create 2 queues named as PoliticsNews and EntertainmentNews 
+c) Create 2 bindings to both the queues with 2 different binding keys as politics and entertainment
+d) Check and verify from queue as well as exchange side whether setup is done or not
+
+Java Based Sender and Receiver
+1) Java 8
+   a) download
+   b) install
+   c) configure
+	JAVA_HOME = C:\Java\jdk1.8.0_161 
+        CLASSPATH = .;%JAVA_HOME%\lib;
+        PATH = .;%JAVA_HOME%\bin;blah;blah;blah
+   d) test/verify 
+  
+2) RabbitMQ Java Client library (jar file)
+3) Java IDE (Eclipse)
+
+
