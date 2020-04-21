@@ -1,0 +1,60 @@
+Exchanges
+  iii) Topic - uses a binding pattern to bind with a queue
+   
+  pattern supports wildcards for binding - 
+	* - means one word
+        # - zero or more words
+     
+  Examples
+     binding patterns - cars.luxury,cars.sedan,cars.suv.*,cars.suv.*.*.india,cars.cheap.#.german,#      
+ 
+  
+queue.bike
+queue.bike.luxury
+queue.bike.luxury.india
+queue.bike.luxury.uk
+queue.car
+queue.car.bmw
+queue.car.hyundai
+queue.car.cheap
+queue.car.luxury
+queue.car.sedan
+
+
+  iv) Headers - uses headers to bind with a queue
+   
+      header format is like name=value and there can be more then one header also
+     
+  Examples
+      lang=en
+      type=funny
+      country=IN       
+
+EX
+news
+
+Q
+news.crime.english.q
+news.english.q
+news.politics.english.q
+
+Queue Features
+
+Binding patterns
+Binding headers
+
+TTL messaging
+Persistent/Non-Persistent messaging
+Priority messaging
+
+Virtual host
+
+Cluster
+
+Dead Letter - any messages which are lost because of some limits/configuration are known as dead messages/letters
+Dead Letter Queue - a standard queue to hold dead messages
+Dead Letter Exchange - a standard exchange which routes dead messages to dead letter queue
+
+Message Broker Gurantees
+1) Message will be delivered 100% to receiver party
+2) Message will not be delivered twice (duplicate)

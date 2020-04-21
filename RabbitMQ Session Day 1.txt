@@ -12,6 +12,9 @@ or send me messages in case of doubts
 Code Sharing
 Everyday will share code to you guys through GITHUB
 
+https://github.com/misguided-coder/dell-malaysia-rabbitmq
+
+
 Ritesh Tyagi (Trainer)
 HI2TYAGI@YAHOO.COM
 
@@ -52,7 +55,7 @@ RabbitMQ Management
 2) Graphical Interface  (GUI) - comes as a plugin ( rabbitmq_management,rabbitmq_management_agent )
 
 RabbitMQ Broker Concepts
-1) Messaging System/MQ Product/Message Broker
+1) Messaging System/MQ Product/Message Broker/MOM
 2) Messaging Applications - PtP and PubSub 
 3) Queue/Topic
 4) Sender/Publisher and Receiver/Subscriber/Consumer 
@@ -76,6 +79,7 @@ RabbitMQ Broker Concepts
 13) Users - can be added with different priviledges
 14) Policies/Permmissions - can be used to define ACL
 15) Plugins  - are used to extend product functionalities 
+16) Cluster  - group of RabbitMQ nodes 
 
 
 Routing/Integration Products
