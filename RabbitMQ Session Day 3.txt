@@ -1,0 +1,107 @@
+Virtual Host
+	- is a logical container inside single RabbitMQ instance to holds all the messaging 
+          components for a perticular client/application	
+	- will provide neat and clean seperation layer between different projects		
+
+RabbitMQ comes with a default virtual host with a name "/"
+
+Use Case
+
+customer 1 - WallMart
+             Project 1 - Retail Market App
+             Project 2 - Corporate Market App
+             Project 3 - Backoffice App
+
+customer 2 - Amazon
+
+customer 3 - DBS
+
+Security
+
+Users
+	- is a physical entity
+
+Roles
+        - is a logical entity and always mapped to users
+
+Permissions (ACL)
+	- list of ALLOWED/DENIED TODOs for specific users
+        - configure operations
+          (declare,delete) on exchanges/queues
+        - write operations
+          send message to exchanges/queues
+        - read operations
+          consume message from exchanges/queues
+	- regexp/wildcard patterns
+
+Level One of Access Grant is VIRTUALHOST
+Level Two of Access Grant is RESOURCE
+a) exchange is a resource (regex syntax)
+b) queue is a resource (regex syntax)
+
+
+Policies 
+	- is a group of parameters/configurations/features applied to queues/exchanges/both
+	- make it easy to apply same set of features on multiple queues/exchanges automatically 
+          without any manual/repetetive admin work
+	- can be created in advance as per my organitaion requirements by a guy who understands 
+          requirements very well and knows which SLAs to follow at queue/exchange level (policymaker)
+	- standard policy, cluster/HA policy, federation policy
+	- will be applied using regex pattern
+
+Use Case
+	1) Create 5 queues with same set of features
+	2) Create 2 queues with are having same quota limit
+	3) Create 4 queues with are having message lost recovery using DLX/DLQ
+
+Cluster
+	- a group of RabbitMQ server nodes running together as a single node to outside world
+	- to setup distributed RabbitMQ brokers
+	- to provide a scalabale environment 
+        - highily available (HA) messaging system/environment (100% uptime) (fail-over)
+	- load balanced client application(sender/receiver)
+        - each node will be a replica of other nodes 
+        - exchanges/bindings/policies/virtualhosts/users are replicated by default
+        - queue replication is not automatic and needs configuration using "mirror plugin" - HA
+	- queue is globally available in the entire cluster and can be looked up and 
+	  seen from any node in the cluster to acheive load balancing and scalability
+	- master/slave configuration
+      
+Cluster Topology
+
+1) Same machine cluster
+2) Different machine cluster
+
+Mirror Plugin
+        - is used for queue replication 
+	- is used to make cluster HA
+
+Cluster Setup steps
+
+1) Change each node name to be unique
+2) Change each node all ports
+3) Start each node one by one
+4) Join slaves with master using commands
+5) Check the status of cluster is up/not
+6) Test your cluster
+
+Cluster Testing
+1) Load balancing is working or not
+2) Fair Over is working or not
+
+Testing Use Cases
+1) Create a new virtual host on master and check whether it is replicated to slave or not
+2) Create a new user host on master and check whether it is replicated to slave or not
+3) Create a new policy on master and check whether it is replicated to slave or not
+4) Create a new exchange on master and check whether it is replicated to slave or not
+5) Create a new queue on master and check whether it is replicated to slave or not
+6) Create a sender to send few messages on a queue in the cluster and run a receiver to receive messages
+   from the same queue using different node in the same cluster (LB)
+7) Create a sender to send few messages on a queue on the master node in the cluster and then 
+   shut down the master node which physically contains the queue and then run a receiver to 
+   receive messages  from the same queue using slave node in the same cluster (Fail Over - HA)
+
+
+
+Shovel Plugin
+
