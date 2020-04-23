@@ -1,0 +1,159 @@
+Cluster
+	- a group of RabbitMQ server nodes running together as a single node to outside world
+	- to setup distributed RabbitMQ brokers
+	- to provide a scalabale environment 
+        - highily available (HA) messaging system/environment (100% uptime) (fail-over)
+	- load balanced client application(sender/receiver)
+        - each node will be a replica of other nodes 
+        - exchanges/bindings/policies/virtualhosts/users are replicated by default
+        - queue replication is not automatic and needs configuration using "mirror plugin" - HA
+	- queue is globally available in the entire cluster and can be looked up and 
+	  seen from any node in the cluster to acheive load balancing and scalability
+	- master/slave configuration
+      
+Cluster Topology
+
+1) Same machine cluster
+2) Different machine cluster
+
+Mirror Plugin
+        - is used for queue replication 
+	- is used to make cluster HA
+
+Cluster Setup steps
+
+1) Change each node name to be unique
+2) Change each node all ports
+3) Start each node one by one
+4) Join slaves with master using commands
+5) Check the status of cluster is up/not
+6) Test your cluster
+
+Cluster Testing
+1) Load balancing is working or not
+2) Fair Over is working or not
+
+Testing Use Cases
+1) Create a new virtual host on master and check whether it is replicated to slave or not
+2) Create a new user host on master and check whether it is replicated to slave or not
+3) Create a new policy on master and check whether it is replicated to slave or not
+4) Create a new exchange on master and check whether it is replicated to slave or not
+5) Create a new queue on master and check whether it is replicated to slave or not
+6) Create a sender to send few messages on a queue in the cluster and run a receiver to receive messages
+   from the same queue using different node in the same cluster (LB)
+7) Create a sender to send few messages on a queue on the master node in the cluster and then 
+   shut down the master node which physically contains the queue and then run a receiver to 
+   receive messages  from the same queue using slave node in the same cluster (Fail Over - HA)
+8) One node is down in the cluster while other nodes are sent lots of messages. When the node which 
+   was down, comes up and joins the cluster, what will happen w.r.t. data sync.  (manual sync/automatic sync)
+9) Cluster has 20 nodes and replication is happening to all the nodes. This is not a good solution w.r.t.
+   performance. Go for primary group based replication.
+
+
+Distributed Environment
+
+Cluster Setup
+Mirror Plugin
+	    - can be used only after cluster is ready which is an extra overhead in terms of admin 
+	      work and extra configurations
+            - network partition is not supported (Only LAN support)	
+            - only host names are supported and does not support IP address
+	    - long name support is very limited and not enabled by default, only short names are 
+              supported by default
+            - same version of RabbitMQ product and same version of ERLang is required to 
+	      setup the cluster 
+            - by using same erlang.cookie on all the brokers
+
+Shovel Plugin (Consumer)
+             - is used to read messages from one broker and write the same messages to another broker 	
+	     - queue to queue pumping (move operation)
+			i) queues may exist on same broker
+			ii) queues may exist on two different brokers (on same machine/different machine)
+			iii) queues may belong to different virtualhost also
+	     - queue to exchange pumping (move operation)
+	     - is a ready made client/consumer program built using ERlang inside RabbitMQ broker
+             - is highly configurable
+	     - connect mutiple brokers in few minutes with very few configurations without cluster setup	
+	     - IP addresses can be used to connect brokers
+	     - supports network partitions (WAN)	 		
+ 	     - can use different version of RabbitMQ product and different version of ERLang on each side
+             - authentication is used/password based
+             - shovel plugin can be enabled on any one of the node only
+	     - low level infrastructure to setup two or more brokers
+             - is merely just a tiny/small client
+	     - provided two way/bidirectional data flow
+			
+
+Federation Plugin
+             - is route all messages from one exchange on one broker to other exchange to another broker
+	     - exchange-to-exahange communication but on different brokers
+	     - setup data streams/flow from broker A to broker B
+	     - setup upstreams(source) and downstreams(destination)	
+	     - high level infrastructure to setup two or more brokers			
+	     - it should be enabled on all the brokers where it is going to be 
+	     - is just one way solution i.e. one way data flow
+	     - setup will always take place from downstream to upstream
+             - admin guy has to stand on downstream(destination) broker to do all the configuration
+	     	
+
+Hybrid Approach
+
+
+Third Party (Broker) Integration
+
+RabbitMQ
+WeblogicMQ
+IBM MQ
+Active MQ
+Hornet Q
+MSMQ
+
+Use Case 
+
+RabbitMQ -> IBM MQ
+
+Foreign JMS Broker (Weblogic)
+Bridge Connector
+
+Create a custom connector with the help of avalable tools/technologies
+AMQP
+JMS
+JNDI
+
+Apache Camel
+Spring Integration
+IBM Integrator (Connector Framework)
+JMS based connector using AMQP JAVA API
+.NET based connector using AMQP .NET API
+ERLang plugin for RabbitMQ
+
+SSL
+ca certficate file (.pem)
+server certificate file (.pem)
+private key file (.pem)
+
+
+Roadmap
+
+1) Try setup multi machine cluster
+2) Try setup shavel on diffeerent machine with more links
+3) Try setup federation on diffeerent machine with more links
+4) Try sharding plugin
+5) Enable support for MQTT/STOMP protocol using plugins
+6) Enable SSL for UI console, first grab certificates or generate self signed certificate using Java "keytool" 
+7) Try connecting to different database to hold security information rather mnesia
+8) Learn how to write custom plugins
+9) Practice all different commands using rabbitmqctl
+10) Try using third party monitoring tool with RabbitMQ to do effective monitoring like Prometheus & Grafana
+
+
+
+
+
+
+
+
+
+
+
+

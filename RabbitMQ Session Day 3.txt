@@ -95,13 +95,19 @@ Testing Use Cases
 3) Create a new policy on master and check whether it is replicated to slave or not
 4) Create a new exchange on master and check whether it is replicated to slave or not
 5) Create a new queue on master and check whether it is replicated to slave or not
-6) Create a sender to send few messages on a queue in the cluster and run a receiver to receive messages
-   from the same queue using different node in the same cluster (LB)
-7) Create a sender to send few messages on a queue on the master node in the cluster and then 
+  7) Create a sender to send few messages on a queue on the master node in the cluster and then 
    shut down the master node which physically contains the queue and then run a receiver to 
    receive messages  from the same queue using slave node in the same cluster (Fail Over - HA)
 
 
-
 Shovel Plugin
+
+Federation Plugin
+
+Firehose Plugin (theoritically)
+
+Third Party (Broker) Integration
+
+CLI (rabbitmqctl)
+
 
